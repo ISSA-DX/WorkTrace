@@ -1,0 +1,70 @@
+{% extends "admin_base.html" %}
+{% block title %}Email Settings — WorkTrace Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Email Settings</h1>
+  <p class="page-sub">Configure SMTP for sending timesheet emails</p>
+</div>
+
+<div class="form-section">
+  <form method="POST" action="{{ url_for('admin_email_settings') }}" novalidate>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="mail_server">SMTP Server</label>
+        <input type="text" id="mail_server" name="mail_server"
+               value="{{ settings.mail_server }}" placeholder="smtp.gmail.com"/>
+      </div>
+      <div class="form-group">
+        <label for="mail_port">SMTP Port</label>
+        <input type="number" id="mail_port" name="mail_port"
+               value="{{ settings.mail_port }}" placeholder="587"/>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="mail_username">Username / Email</label>
+        <input type="email" id="mail_username" name="mail_username"
+               value="{{ settings.mail_username }}" placeholder="you@gmail.com"/>
+      </div>
+      <div class="form-group">
+        <label for="mail_password">Password / App Password</label>
+        <input type="password" id="mail_password" name="mail_password"
+               placeholder="Leave blank to keep existing"/>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="mail_default_sender">Default Sender Address</label>
+        <input type="email" id="mail_default_sender" name="mail_default_sender"
+               value="{{ settings.mail_default_sender }}" placeholder="noreply@yourcompany.com"/>
+      </div>
+      <div class="form-group">
+        <label>Security</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="mail_use_tls" {{ 'checked' if settings.mail_use_tls }}/> Use TLS (port 587)</label>
+          <label><input type="checkbox" name="mail_use_ssl" {{ 'checked' if settings.mail_use_ssl }}/> Use SSL (port 465)</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Save Settings</button>
+    </div>
+  </form>
+
+  <hr class="section-divider"/>
+
+  <h3>Send Test Email</h3>
+  <form method="POST" action="{{ url_for('admin_test_email') }}" novalidate>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="test_email">Test Email Address</label>
+        <input type="email" id="test_email" name="test_email" placeholder="test@example.com"/>
+      </div>
+      <div class="form-group form-group-action">
+        <label>&nbsp;</label>
+        <button type="submit" class="btn btn-outline">Send Test Email</button>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

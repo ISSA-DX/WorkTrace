@@ -1,0 +1,46 @@
+{% extends "admin_base.html" %}
+{% block title %}QR Codes — WorkTrace Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>QR Codes</h1>
+    <p class="page-sub">Print and display these at clock-in/out stations • {{ today.strftime('%B %d, %Y') }}</p>
+  </div>
+  <a href="{{ url_for('admin_qr_codes') }}" class="btn btn-outline">Regenerate</a>
+</div>
+
+<div class="qr-admin-grid">
+  <div class="qr-admin-card qr-card-in">
+    <div class="qr-label">CLOCK IN</div>
+    {% if clock_in_qr %}
+      <img src="{{ url_for('static', filename='qr_codes/' + clock_in_qr) }}"
+           alt="Clock In QR Code" class="qr-image-large"/>
+    {% else %}
+      <div class="qr-placeholder large">QR unavailable<br/><small>Install qrcode library</small></div>
+    {% endif %}
+    <div class="qr-info">
+      <p>URL: <code>{{ clock_in_url }}</code></p>
+      <p class="qr-instruction">Place at the <strong>entrance</strong>. Employees scan to start their shift.</p>
+    </div>
+  </div>
+
+  <div class="qr-admin-card qr-card-out">
+    <div class="qr-label">CLOCK OUT</div>
+    {% if clock_out_qr %}
+      <img src="{{ url_for('static', filename='qr_codes/' + clock_out_qr) }}"
+           alt="Clock Out QR Code" class="qr-image-large"/>
+    {% else %}
+      <div class="qr-placeholder large">QR unavailable<br/><small>Install qrcode library</small></div>
+    {% endif %}
+    <div class="qr-info">
+      <p>URL: <code>{{ clock_out_url }}</code></p>
+      <p class="qr-instruction">Place at the <strong>exit</strong>. Employees scan to end their shift.</p>
+    </div>
+  </div>
+</div>
+
+<div class="qr-print-note">
+  <p>💡 <strong>Tip:</strong> Use your browser's Print function (Ctrl+P / Cmd+P) to print these QR codes.
+     Make sure the device serving WorkTrace is reachable on your local network at the URL shown above.</p>
+</div>
+{% endblock %}

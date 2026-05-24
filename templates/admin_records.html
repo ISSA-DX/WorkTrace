@@ -1,0 +1,103 @@
+{% extends "admin_base.html" %}
+{% block title %}Records — WorkTrace Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Time Records</h1>
+    <p class="page-sub">{{ records|length }} records shown</p>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <form method="GET" action="{{ url_for('admin_records') }}" class="filter-form">
+    <div class="filter-group">
+      <label>Employee</label>
+      <select name="staff_id">
+        <option value="">All Employees</option>
+        {% for emp in employees %}
+          <option value="{{ emp.staff_id }}" {{ 'selected' if selected_staff_id == emp.staff_id }}>
+            {{ emp.name }} ({{ emp.staff_id }})
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Status</label>
+      <select name="status">
+        <option value="">All</option>
+        <option value="pending" {{ 'selected' if selected_status == 'pending' }}>Pending</option>
+        <option value="approved" {{ 'selected' if selected_status == 'approved' }}>Approved</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>From</label>
+      <input type="date" name="date_from" value="{{ date_from or '' }}"/>
+    </div>
+    <div class="filter-group">
+      <label>To</label>
+      <input type="date" name="date_to" value="{{ date_to or '' }}"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+    <a href="{{ url_for('admin_records') }}" class="btn btn-outline">Reset</a>
+  </form>
+</div>
+
+<div class="table-wrap">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Employee</th>
+        <th>Staff ID</th>
+        <th>Clock In</th>
+        <th>Clock Out</th>
+        <th>Rest</th>
+        <th>Hours</th>
+        <th>Salary</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for record in records %}
+        <tr>
+          <td>{{ record.date.strftime('%b %d, %Y') }}</td>
+          <td><strong>{{ record.employee_name }}</strong></td>
+          <td><code>{{ record.staff_id }}</code></td>
+          <td>{{ record.clock_in_time.strftime('%I:%M %p') if record.clock_in_time else '—' }}</td>
+          <td>{{ record.clock_out_time.strftime('%I:%M %p') if record.clock_out_time else '—' }}</td>
+          <td>{{ '%.0f min'|format(record.rest_minutes) if record.rest_minutes else '—' }}</td>
+          <td>{{ '%.2f'|format(record.hours_worked) if record.clock_out_time else '—' }}</td>
+          <td>{{ '$%.2f'|format(record.salary_earned) if record.clock_out_time else '—' }}</td>
+          <td>
+            {% if record.is_approved %}
+              <span class="badge badge-green">Approved</span>
+            {% elif record.clock_out_time %}
+              <span class="badge badge-yellow">Pending</span>
+            {% else %}
+              <span class="badge badge-blue">In Progress</span>
+            {% endif %}
+          </td>
+          <td class="actions">
+            {% if record.clock_out_time and not record.is_approved %}
+              <form method="POST" action="{{ url_for('admin_approve_record', record_id=record.id) }}" style="display:inline">
+                <button type="submit" class="btn-sm btn-primary">Approve</button>
+              </form>
+            {% endif %}
+            {% if record.clock_in_time %}
+              <a href="{{ url_for('admin_generate_pdf', record_id=record.id) }}" class="btn-sm btn-outline">PDF</a>
+            {% endif %}
+            <form method="POST" action="{{ url_for('admin_delete_record', record_id=record.id) }}"
+                  style="display:inline"
+                  onsubmit="return confirm('Delete this record?')">
+              <button type="submit" class="btn-sm btn-danger">Del</button>
+            </form>
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="10" class="empty-state">No records match your filters.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

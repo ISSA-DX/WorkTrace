@@ -1,0 +1,77 @@
+{% extends "admin_base.html" %}
+{% block title %}{{ 'Edit' if employee else 'Add' }} Employee — WorkTrace Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>{{ 'Edit Employee' if employee else 'Add Employee' }}</h1>
+    <p class="page-sub">{{ employee.name if employee else 'Create a new employee record' }}</p>
+  </div>
+  <a href="{{ url_for('admin_employees') }}" class="btn btn-outline">← Back</a>
+</div>
+
+<div class="form-section">
+  <form method="POST" action="{{ url_for('admin_edit_employee', staff_id=employee.staff_id) if employee else url_for('admin_add_employee') }}" novalidate>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="staff_id">Staff ID <span class="required">*</span></label>
+        {% if employee %}
+          <input type="text" value="{{ employee.staff_id }}" disabled/>
+          <p class="field-hint">Staff ID cannot be changed after creation.</p>
+        {% else %}
+          <input type="text" id="staff_id" name="staff_id" required
+                 value="{{ form_data.get('staff_id', next_id or '') }}"
+                 placeholder="e.g. S001"/>
+        {% endif %}
+      </div>
+      <div class="form-group">
+        <label for="name">Full Name <span class="required">*</span></label>
+        <input type="text" id="name" name="name" required
+               value="{{ form_data.get('name', employee.name if employee else '') }}"
+               placeholder="e.g. John Smith"/>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="position">Position</label>
+        <input type="text" id="position" name="position"
+               value="{{ form_data.get('position', employee.position if employee else '') }}"
+               placeholder="e.g. Cashier"/>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email"
+               value="{{ form_data.get('email', employee.email if employee else '') }}"
+               placeholder="employee@example.com"/>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="hourly_rate">Hourly Rate ($) <span class="required">*</span></label>
+        <input type="number" id="hourly_rate" name="hourly_rate" step="0.01" min="0" required
+               value="{{ form_data.get('hourly_rate', '%.2f'|format(employee.hourly_rate) if employee else '15.00') }}"/>
+      </div>
+      {% if employee %}
+      <div class="form-group">
+        <label>Active Status</label>
+        <label class="toggle-label">
+          <input type="checkbox" name="is_active" id="is_active"
+                 {{ 'checked' if employee.is_active }}/>
+          <span class="toggle-slider"></span>
+          Employee is active
+        </label>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">
+        {{ 'Save Changes' if employee else 'Add Employee' }}
+      </button>
+      <a href="{{ url_for('admin_employees') }}" class="btn btn-outline">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

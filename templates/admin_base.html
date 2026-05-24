@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Admin — WorkTrace{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="admin-body">
+
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-icon">⏱</span>
+      <span>WorkTrace</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="{{ url_for('admin_dashboard') }}" class="sidebar-link {% if request.endpoint == 'admin_dashboard' %}active{% endif %}">
+        <span class="nav-icon">📊</span> Dashboard
+      </a>
+      <a href="{{ url_for('admin_employees') }}" class="sidebar-link {% if 'employee' in request.endpoint %}active{% endif %}">
+        <span class="nav-icon">👥</span> Employees
+      </a>
+      <a href="{{ url_for('admin_records') }}" class="sidebar-link {% if 'record' in request.endpoint %}active{% endif %}">
+        <span class="nav-icon">📋</span> Records
+      </a>
+      <a href="{{ url_for('admin_qr_codes') }}" class="sidebar-link {% if request.endpoint == 'admin_qr_codes' %}active{% endif %}">
+        <span class="nav-icon">📱</span> QR Codes
+      </a>
+      <a href="{{ url_for('admin_network_settings') }}" class="sidebar-link {% if 'network' in request.endpoint %}active{% endif %}">
+        <span class="nav-icon">🌐</span> Network
+      </a>
+      <a href="{{ url_for('admin_email_settings') }}" class="sidebar-link {% if 'email' in request.endpoint %}active{% endif %}">
+        <span class="nav-icon">✉️</span> Email Settings
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <span class="admin-name">{{ current_user.username }}</span>
+      <a href="{{ url_for('admin_logout') }}" class="logout-link">Logout</a>
+    </div>
+  </aside>
+
+  <div class="admin-content">
+    <div class="flash-container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">
+            <span>{{ message }}</span>
+            <button class="alert-close" onclick="this.parentElement.remove()">✕</button>
+          </div>
+        {% endfor %}
+      {% endwith %}
+    </div>
+
+    {% block content %}{% endblock %}
+  </div>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

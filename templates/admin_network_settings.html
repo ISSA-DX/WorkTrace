@@ -1,0 +1,54 @@
+{% extends "admin_base.html" %}
+{% block title %}Network Settings — WorkTrace Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Network Settings</h1>
+    <p class="page-sub">Configure the URL used in QR codes so employees can reach this site from their phones.</p>
+  </div>
+</div>
+
+<div class="form-card" style="max-width: 640px;">
+  <div class="form-group">
+    <label>Current QR Code URL</label>
+    <input type="text" readonly value="{{ network_url }}" />
+    <small class="form-hint">This is the address encoded in the Clock-In and Clock-Out QR codes.</small>
+  </div>
+
+  <div class="form-group">
+    <label>Detected Local IP</label>
+    <input type="text" readonly value="{{ detected_ip }}" />
+    <small class="form-hint">Auto-detected LAN IP. Use this if the scanning device is on the same Wi-Fi.</small>
+  </div>
+
+  <h3 style="margin-top: 1.5rem;">Suggested URLs</h3>
+  <ul class="url-list">
+    {% for url in host_urls %}
+      <li>
+        <code>{{ url }}</code>
+        <form method="POST" action="{{ url_for('admin_network_settings') }}" style="display:inline">
+          <input type="hidden" name="network_url" value="{{ url }}" />
+          <button type="submit" class="btn-sm btn-primary">Use This</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h3 style="margin-top: 1.5rem;">Custom URL</h3>
+  <form method="POST" action="{{ url_for('admin_network_settings') }}">
+    <div class="form-group">
+      <label for="network_url">Network URL</label>
+      <input type="url" id="network_url" name="network_url" required
+             value="{{ network_url }}"
+             placeholder="http://192.168.1.50:5000" />
+      <small class="form-hint">Enter the full URL (including port) that phones on your network can access.</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Network URL</button>
+  </form>
+</div>
+
+<div class="qr-preview" style="margin-top: 2rem;">
+  <h3>QR Code Preview</h3>
+  <p>Go to <a href="{{ url_for('admin_qr_codes') }}">QR Codes</a> to regenerate after changing the URL.</p>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Clocked Out — WorkTrace{% endblock %}
+{% block content %}
+<div class="success-page">
+  <div class="success-card">
+    <div class="success-icon success-out">✓</div>
+    <h2>Shift Complete!</h2>
+    <p class="success-name">{{ employee.name }}</p>
+    <div class="success-details">
+      <div class="detail-row"><span>Staff ID</span><strong>{{ employee.staff_id }}</strong></div>
+      <div class="detail-row"><span>Position</span><strong>{{ employee.position or 'N/A' }}</strong></div>
+      {% if record %}
+        {% if record.clock_in_time %}
+        <div class="detail-row"><span>Clock In</span><strong>{{ record.clock_in_time.strftime('%I:%M %p') }}</strong></div>
+        {% endif %}
+        {% if record.clock_out_time %}
+        <div class="detail-row"><span>Clock Out</span><strong>{{ record.clock_out_time.strftime('%I:%M %p') }}</strong></div>
+        {% endif %}
+        {% if record.rest_minutes %}
+        <div class="detail-row"><span>Rest / Break</span><strong>{{ '%.0f'|format(record.rest_minutes) }} min</strong></div>
+        {% endif %}
+        <div class="detail-row highlight"><span>Hours Worked</span><strong>{{ '%.2f'|format(record.hours_worked) }} hrs</strong></div>
+        <div class="detail-row highlight-green"><span>Salary Earned</span><strong>${{ '%.2f'|format(record.salary_earned) }}</strong></div>
+      {% endif %}
+    </div>
+    <a href="{{ url_for('index') }}" class="btn btn-primary">Back to Home</a>
+  </div>
+</div>
+{% endblock %}

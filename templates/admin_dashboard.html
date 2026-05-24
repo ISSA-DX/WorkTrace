@@ -1,0 +1,80 @@
+{% extends "admin_base.html" %}
+{% block title %}Dashboard — WorkTrace Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Dashboard</h1>
+  <p class="page-sub">{{ today.strftime('%A, %B %d, %Y') }}</p>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon">👥</div>
+    <div class="stat-val">{{ total_employees }}</div>
+    <div class="stat-label">Active Employees</div>
+  </div>
+  <div class="stat-card stat-card-blue">
+    <div class="stat-icon">🟢</div>
+    <div class="stat-val">{{ clocked_in }}</div>
+    <div class="stat-label">Currently Working</div>
+  </div>
+  <div class="stat-card stat-card-green">
+    <div class="stat-icon">✅</div>
+    <div class="stat-val">{{ completed }}</div>
+    <div class="stat-label">Completed Today</div>
+  </div>
+  <div class="stat-card stat-card-orange">
+    <div class="stat-icon">💰</div>
+    <div class="stat-val">${{ '%.2f'|format(total_salary) }}</div>
+    <div class="stat-label">Total Salary Today</div>
+  </div>
+</div>
+
+<div class="section-header">
+  <h2>Today's Attendance</h2>
+  <a href="{{ url_for('admin_records') }}" class="btn btn-outline">View All Records</a>
+</div>
+
+<div class="table-wrap">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Staff ID</th>
+        <th>Position</th>
+        <th>Clock In</th>
+        <th>Clock Out</th>
+        <th>Hours</th>
+        <th>Salary</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for employee in employees %}
+        {% set record = records.get(employee.staff_id) %}
+        <tr>
+          <td><strong>{{ employee.name }}</strong></td>
+          <td><code>{{ employee.staff_id }}</code></td>
+          <td>{{ employee.position or '—' }}</td>
+          <td>{{ record.clock_in_time.strftime('%I:%M %p') if record and record.clock_in_time else '—' }}</td>
+          <td>{{ record.clock_out_time.strftime('%I:%M %p') if record and record.clock_out_time else '—' }}</td>
+          <td>{{ '%.2f'|format(record.hours_worked) if record and record.clock_out_time else '—' }}</td>
+          <td>{{ '$%.2f'|format(record.salary_earned) if record and record.clock_out_time else '—' }}</td>
+          <td>
+            {% if not record %}
+              <span class="badge badge-grey">Not In</span>
+            {% elif record.clock_in_time and not record.clock_out_time %}
+              <span class="badge badge-blue">Working</span>
+            {% elif record.clock_out_time and record.is_approved %}
+              <span class="badge badge-green">Approved</span>
+            {% elif record.clock_out_time %}
+              <span class="badge badge-yellow">Pending</span>
+            {% endif %}
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="8" class="empty-state">No active employees found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

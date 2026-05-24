@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Clock In — WorkTrace{% endblock %}
+{% block content %}
+<div class="form-page">
+  <div class="form-card">
+    <div class="form-header form-header-in">
+      <span class="form-icon">🟢</span>
+      <h2>Clock In</h2>
+      <p>Enter your details to start your shift</p>
+    </div>
+    <form method="POST" action="{{ url_for('clock_in_form') }}" novalidate>
+      <div class="form-group">
+        <label for="name">Full Name <span class="required">*</span></label>
+        <input type="text" id="name" name="name" required
+               value="{{ form_data.get('name', '') }}"
+               placeholder="e.g. John Smith"/>
+      </div>
+      <div class="form-group">
+        <label for="staff_id">Staff ID <span class="required">*</span></label>
+        <input type="text" id="staff_id" name="staff_id" required
+               value="{{ form_data.get('staff_id', '') }}"
+               placeholder="e.g. S001"/>
+      </div>
+      <div class="form-group">
+        <label for="position">Position</label>
+        <input type="text" id="position" name="position"
+               value="{{ form_data.get('position', '') }}"
+               placeholder="e.g. Cashier"/>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address <span class="required">*</span></label>
+        <input type="email" id="email" name="email" required
+               value="{{ form_data.get('email', '') }}"
+               placeholder="you@example.com"/>
+      </div>
+      <div class="form-group">
+        <label for="start_time">Start Time <span class="required">*</span></label>
+        <input type="datetime-local" id="start_time" name="start_time" required
+               value="{{ form_data.get('start_time', now.strftime('%Y-%m-%dT%H:%M')) }}"/>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full">Submit Clock-In ✓</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

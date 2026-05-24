@@ -1,0 +1,55 @@
+{% extends "admin_base.html" %}
+{% block title %}Employees — WorkTrace Admin{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Employees</h1>
+    <p class="page-sub">{{ employees|length }} total employees</p>
+  </div>
+  <a href="{{ url_for('admin_add_employee') }}" class="btn btn-primary">+ Add Employee</a>
+</div>
+
+<div class="table-wrap">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Staff ID</th>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Email</th>
+        <th>Hourly Rate</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for emp in employees %}
+        <tr class="{{ 'row-inactive' if not emp.is_active }}">
+          <td><code>{{ emp.staff_id }}</code></td>
+          <td><strong>{{ emp.name }}</strong></td>
+          <td>{{ emp.position or '—' }}</td>
+          <td>{{ emp.email or '—' }}</td>
+          <td>${{ '%.2f'|format(emp.hourly_rate) }}/hr</td>
+          <td>
+            {% if emp.is_active %}
+              <span class="badge badge-green">Active</span>
+            {% else %}
+              <span class="badge badge-grey">Inactive</span>
+            {% endif %}
+          </td>
+          <td class="actions">
+            <a href="{{ url_for('admin_edit_employee', staff_id=emp.staff_id) }}" class="btn-sm btn-outline">Edit</a>
+            <form method="POST" action="{{ url_for('admin_delete_employee', staff_id=emp.staff_id) }}"
+                  style="display:inline"
+                  onsubmit="return confirm('Delete {{ emp.name }}? This will also delete all their time records.')">
+              <button type="submit" class="btn-sm btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="7" class="empty-state">No employees found. <a href="{{ url_for('admin_add_employee') }}">Add one now.</a></td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

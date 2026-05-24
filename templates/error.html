@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ code }} Error — WorkTrace{% endblock %}
+{% block content %}
+<div class="error-page">
+  <div class="error-card">
+    <div class="error-code">{{ code }}</div>
+    <h2>{{ message }}</h2>
+    <p>{{ detail }}</p>
+    <div class="error-actions">
+      <a href="{{ url_for('index') }}" class="btn btn-primary">← Home</a>
+      <a href="javascript:history.back()" class="btn btn-outline">Go Back</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

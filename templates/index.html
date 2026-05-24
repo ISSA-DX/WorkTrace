@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}WorkTrace — Employee Time Tracking{% endblock %}
+{% block content %}
+<div class="hero">
+  <div class="hero-text">
+    <h1 class="hero-title">Track Your Time,<br/><em>Effortlessly.</em></h1>
+    <p class="hero-sub">Scan a QR code to clock in or out. Simple, fast, accurate.</p>
+    <div class="hero-btns">
+      <a href="{{ url_for('clock_in_form') }}" class="btn btn-primary">Clock In</a>
+      <a href="{{ url_for('clock_out_form') }}" class="btn btn-secondary">Clock Out</a>
+    </div>
+  </div>
+  <div class="hero-qr">
+    <div class="qr-card">
+      <h3>Clock-In QR</h3>
+      {% if clock_in_qr %}
+        <img src="{{ url_for('static', filename='qr_codes/' + clock_in_qr) }}" alt="Clock In QR Code" class="qr-image"/>
+      {% else %}
+        <div class="qr-placeholder">QR unavailable</div>
+      {% endif %}
+      <p class="qr-url">{{ clock_in_url }}</p>
+    </div>
+    <div class="qr-card">
+      <h3>Clock-Out QR</h3>
+      {% if clock_out_qr %}
+        <img src="{{ url_for('static', filename='qr_codes/' + clock_out_qr) }}" alt="Clock Out QR Code" class="qr-image"/>
+      {% else %}
+        <div class="qr-placeholder">QR unavailable</div>
+      {% endif %}
+      <p class="qr-url">{{ clock_out_url }}</p>
+    </div>
+  </div>
+</div>
+
+<section class="steps-section">
+  <h2>How It Works</h2>
+  <div class="steps">
+    <div class="step"><span class="step-num">1</span><h4>Scan QR Code</h4><p>Use your phone camera to scan the Clock-In or Clock-Out QR code.</p></div>
+    <div class="step"><span class="step-num">2</span><h4>Fill Details</h4><p>Enter your name, Staff ID, and confirm your time.</p></div>
+    <div class="step"><span class="step-num">3</span><h4>Submit</h4><p>Your time is recorded instantly — hours and salary calculated automatically.</p></div>
+  </div>
+</section>
+{% endblock %}
