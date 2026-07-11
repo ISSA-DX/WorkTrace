@@ -123,6 +123,17 @@ main { flex: 1; }
 .btn-sm.btn-danger { background: transparent; color: var(--danger); border-color: var(--danger); }
 .btn-sm.btn-danger:hover { background: var(--danger); color: #fff; }
 
+/* ===== Keyboard Focus Accessibility ===== */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--accent) !important;
+  outline-offset: 2px !important;
+  box-shadow: none !important;
+}
+
 /* ===== Forms ===== */
 .form-group { display: flex; flex-direction: column; gap: .4rem; }
 .form-group label { font-weight: 600; font-size: .85rem; color: var(--text); }
