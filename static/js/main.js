@@ -26,4 +26,30 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!confirm(btn.dataset.confirm)) e.preventDefault();
     });
   });
+
+  // Prevent double submits & show visual loading feedback
+  const forms = document.querySelectorAll('form');
+  forms.forEach(form => {
+    form.addEventListener('submit', () => {
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        // Only trigger if form is valid (for HTML5 validation support)
+        if (!form.checkValidity || form.checkValidity()) {
+          setTimeout(() => {
+            submitBtn.disabled = true;
+            const btnText = submitBtn.textContent || '';
+            if (btnText.includes('Clock-In')) {
+              submitBtn.innerHTML = 'Clocking In... ⏳';
+            } else if (btnText.includes('Clock-Out')) {
+              submitBtn.innerHTML = 'Clocking Out... ⏳';
+            } else if (btnText.includes('Approve')) {
+              submitBtn.innerHTML = 'Approving... ⏳';
+            } else {
+              submitBtn.innerHTML = 'Processing... ⏳';
+            }
+          }, 0);
+        }
+      }
+    });
+  });
 });
