@@ -26,4 +26,45 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!confirm(btn.dataset.confirm)) e.preventDefault();
     });
   });
+
+  // Autofill and remember details for Clock-In / Clock-Out
+  const clockForm = document.getElementById('clock-form');
+  if (clockForm) {
+    const fields = ['staff_id', 'name', 'position', 'email'];
+    const rememberMe = document.getElementById('remember_me');
+    const savedRemember = localStorage.getItem('worktrace_remember');
+
+    // Default to true if not set
+    const shouldRemember = savedRemember !== 'false';
+    if (rememberMe) {
+      rememberMe.checked = shouldRemember;
+    }
+
+    if (shouldRemember) {
+      fields.forEach(fieldId => {
+        const input = document.getElementById(fieldId);
+        if (input && !input.value) {
+          const savedVal = localStorage.getItem('worktrace_' + fieldId);
+          if (savedVal) {
+            input.value = savedVal;
+          }
+        }
+      });
+    }
+
+    clockForm.addEventListener('submit', () => {
+      const isChecked = rememberMe ? rememberMe.checked : false;
+      localStorage.setItem('worktrace_remember', isChecked ? 'true' : 'false');
+      fields.forEach(fieldId => {
+        const input = document.getElementById(fieldId);
+        if (input) {
+          if (isChecked) {
+            localStorage.setItem('worktrace_' + fieldId, input.value.trim());
+          } else {
+            localStorage.removeItem('worktrace_' + fieldId);
+          }
+        }
+      });
+    });
+  }
 });

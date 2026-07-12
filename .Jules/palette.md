@@ -1,0 +1,7 @@
+## 2026-05-24 - Keyboard Accessible Toggles & Shared Device Local Storage Persistence
+**Learning:**
+1. Keyboard accessibility is often broken in custom styled toggles when `display: none;` is used to hide the checkbox input. Visually hiding the checkbox with standard screen-reader styles (absolute positioning, 1px width/height, overflow hidden) keeps the element fully focusable by keyboard navigation and interactive for screen readers. Adding a custom focus indicator via `:focus-visible` provides clear visual feedback to users tabbing through the interface.
+2. When implementing persistent autofill/autosave using browser local storage, we must account for shared terminals (like a tablet mounted on a wall for employees). Persisting details unconditionally creates a privacy leak and incorrect data entry risks. Introducing an explicit "Remember my details on this device" toggle gives users clear choices, ensuring that both shared and private devices have optimal, safe UX.
+**Action:**
+1. Avoid `display: none` or `visibility: hidden` for checkboxes that act as toggle elements. Instead, use a visually-hidden class or CSS style and always provide a `:focus-visible` indicator on the sibling element (like a slider).
+2. For forms in multi-user environments, always complement local storage persistence with a clear "Remember Me" toggle that allows users to opt-out or clean up saved credentials instantly.
