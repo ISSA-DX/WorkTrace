@@ -26,4 +26,27 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!confirm(btn.dataset.confirm)) e.preventDefault();
     });
   });
+
+  // Dynamic form submit loading states & prevent double submit
+  const forms = document.querySelectorAll('form');
+  forms.forEach(form => {
+    form.addEventListener('submit', () => {
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        setTimeout(() => {
+          submitBtn.disabled = true;
+          const originalText = submitBtn.textContent;
+          if (originalText.includes('Clock-In')) {
+            submitBtn.textContent = 'Clocking In... ⏱';
+          } else if (originalText.includes('Clock-Out')) {
+            submitBtn.textContent = 'Clocking Out... ⏱';
+          } else if (originalText.includes('Sign In')) {
+            submitBtn.textContent = 'Signing In... ⏱';
+          } else {
+            submitBtn.textContent = 'Saving... ⏱';
+          }
+        }, 0);
+      }
+    });
+  });
 });
