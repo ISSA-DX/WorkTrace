@@ -1,0 +1,3 @@
+## 2026-05-24 - [Accessible Keyboard Focus and Screen Reader Support]
+**Learning:** Adding `:focus-visible` styles explicitly to buttons, links, inputs, and textareas dramatically improves accessibility for keyboard-only navigation. Furthermore, screen-readers often stumble on decorative or system/menu icons (like stopwatch emojis), so wrapping them in elements with `aria-hidden="true"` makes the page much cleaner to digest.
+**Action:** Always include a lightweight focus visible outline and ensure icons/decorative elements are marked with `aria-hidden="true"` and button elements have explicit `aria-label` attributes.
