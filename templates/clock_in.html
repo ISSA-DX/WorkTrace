@@ -10,16 +10,16 @@
     </div>
     <form method="POST" action="{{ url_for('clock_in_form') }}" novalidate>
       <div class="form-group">
-        <label for="name">Full Name <span class="required">*</span></label>
-        <input type="text" id="name" name="name" required
-               value="{{ form_data.get('name', '') }}"
-               placeholder="e.g. John Smith"/>
-      </div>
-      <div class="form-group">
         <label for="staff_id">Staff ID <span class="required">*</span></label>
         <input type="text" id="staff_id" name="staff_id" required
                value="{{ form_data.get('staff_id', '') }}"
                placeholder="e.g. S001"/>
+      </div>
+      <div class="form-group">
+        <label for="name">Full Name <span class="required">*</span></label>
+        <input type="text" id="name" name="name" required
+               value="{{ form_data.get('name', '') }}"
+               placeholder="e.g. John Smith"/>
       </div>
       <div class="form-group">
         <label for="position">Position</label>

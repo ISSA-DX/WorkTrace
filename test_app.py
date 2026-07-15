@@ -1079,6 +1079,47 @@ class TestAPIEndpoints:
         assert isinstance(data, list)
         assert any(e['staff_id'] == 'API1' for e in data)
 
+    def test_api_employee_lookup_found(self, app, client):
+        """
+        The public employee lookup API should return details of active employees.
+        """
+        with app.app_context():
+            emp = Employee(staff_id='LOOKUP1', name='Lookup User',
+                           position='Consultant', email='lookup@example.com',
+                           hourly_rate=25, is_active=True)
+            db.session.add(emp)
+            db.session.commit()
+        resp = client.get('/api/employee-lookup/LOOKUP1')
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data['found'] is True
+        assert data['name'] == 'Lookup User'
+        assert data['position'] == 'Consultant'
+        assert data['email'] == 'lookup@example.com'
+
+    def test_api_employee_lookup_not_found(self, client):
+        """
+        Looking up a non-existent employee should return a 404 error.
+        """
+        resp = client.get('/api/employee-lookup/NONEXISTENT')
+        assert resp.status_code == 404
+        data = resp.get_json()
+        assert data['found'] is False
+
+    def test_api_employee_lookup_inactive(self, app, client):
+        """
+        Looking up an inactive employee should return 404 error.
+        """
+        with app.app_context():
+            emp = Employee(staff_id='INACTIVE1', name='Inactive User',
+                           hourly_rate=15, is_active=False)
+            db.session.add(emp)
+            db.session.commit()
+        resp = client.get('/api/employee-lookup/INACTIVE1')
+        assert resp.status_code == 404
+        data = resp.get_json()
+        assert data['found'] is False
+
 
 # ============================================================
 # ERROR HANDLER TESTS

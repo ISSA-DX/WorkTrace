@@ -1385,6 +1385,20 @@ def api_employees():
     } for e in employees])
 
 
+@app.route('/api/employee-lookup/<staff_id>')
+def api_employee_lookup(staff_id):
+    """Return name, position, and email for auto-fill based on staff ID."""
+    employee = Employee.query.filter_by(staff_id=staff_id.strip().upper(), is_active=True).first()
+    if employee:
+        return jsonify({
+            'found': True,
+            'name': employee.name,
+            'position': employee.position or '',
+            'email': employee.email or ''
+        })
+    return jsonify({'found': False, 'message': 'Employee not found'}), 404
+
+
 # ------------------------------------------------------------------
 # SECTION 13: DATABASE INITIALIZATION
 # This runs once when the app starts to create tables and sample data.
