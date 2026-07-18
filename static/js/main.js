@@ -26,4 +26,46 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!confirm(btn.dataset.confirm)) e.preventDefault();
     });
   });
+
+  // Remember details on clock-in / clock-out forms
+  const nameInput = document.getElementById('name');
+  const staffIdInput = document.getElementById('staff_id');
+  const positionInput = document.getElementById('position');
+  const emailInput = document.getElementById('email');
+  const rememberMeCheckbox = document.getElementById('remember_me');
+
+  if (rememberMeCheckbox && nameInput && staffIdInput && emailInput) {
+    // Check if saved details exist in localStorage
+    const savedName = localStorage.getItem('wt_employee_name');
+    const savedStaffId = localStorage.getItem('wt_employee_staff_id');
+    const savedPosition = localStorage.getItem('wt_employee_position');
+    const savedEmail = localStorage.getItem('wt_employee_email');
+
+    if (savedName && savedStaffId && savedEmail) {
+      if (!nameInput.value) nameInput.value = savedName;
+      if (!staffIdInput.value) staffIdInput.value = savedStaffId;
+      if (positionInput && !positionInput.value) positionInput.value = savedPosition || '';
+      if (!emailInput.value) emailInput.value = savedEmail;
+      rememberMeCheckbox.checked = true;
+    }
+
+    const form = rememberMeCheckbox.closest('form');
+    if (form) {
+      form.addEventListener('submit', () => {
+        if (rememberMeCheckbox.checked) {
+          localStorage.setItem('wt_employee_name', nameInput.value.trim());
+          localStorage.setItem('wt_employee_staff_id', staffIdInput.value.trim());
+          if (positionInput) {
+            localStorage.setItem('wt_employee_position', positionInput.value.trim());
+          }
+          localStorage.setItem('wt_employee_email', emailInput.value.trim());
+        } else {
+          localStorage.removeItem('wt_employee_name');
+          localStorage.removeItem('wt_employee_staff_id');
+          localStorage.removeItem('wt_employee_position');
+          localStorage.removeItem('wt_employee_email');
+        }
+      });
+    }
+  }
 });
