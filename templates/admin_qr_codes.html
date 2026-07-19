@@ -19,7 +19,10 @@
       <div class="qr-placeholder large">QR unavailable<br/><small>Install qrcode library</small></div>
     {% endif %}
     <div class="qr-info">
-      <p>URL: <code>{{ clock_in_url }}</code></p>
+      <p style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap;">
+        URL: <code>{{ clock_in_url }}</code>
+        <button class="btn-sm btn-outline copy-url-btn" data-url="{{ clock_in_url }}" aria-label="Copy Clock-In URL" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">Copy</button>
+      </p>
       <p class="qr-instruction">Place at the <strong>entrance</strong>. Employees scan to start their shift.</p>
     </div>
   </div>
@@ -33,7 +36,10 @@
       <div class="qr-placeholder large">QR unavailable<br/><small>Install qrcode library</small></div>
     {% endif %}
     <div class="qr-info">
-      <p>URL: <code>{{ clock_out_url }}</code></p>
+      <p style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap;">
+        URL: <code>{{ clock_out_url }}</code>
+        <button class="btn-sm btn-outline copy-url-btn" data-url="{{ clock_out_url }}" aria-label="Copy Clock-Out URL" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">Copy</button>
+      </p>
       <p class="qr-instruction">Place at the <strong>exit</strong>. Employees scan to end their shift.</p>
     </div>
   </div>

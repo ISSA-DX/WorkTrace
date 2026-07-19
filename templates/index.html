@@ -18,7 +18,10 @@
       {% else %}
         <div class="qr-placeholder">QR unavailable</div>
       {% endif %}
-      <p class="qr-url">{{ clock_in_url }}</p>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin-top: 0.75rem;">
+        <p class="qr-url" style="margin-top: 0;">{{ clock_in_url }}</p>
+        <button class="btn-sm btn-outline copy-url-btn" data-url="{{ clock_in_url }}" aria-label="Copy Clock-In URL" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">Copy URL</button>
+      </div>
     </div>
     <div class="qr-card">
       <h3>Clock-Out QR</h3>
@@ -27,7 +30,10 @@
       {% else %}
         <div class="qr-placeholder">QR unavailable</div>
       {% endif %}
-      <p class="qr-url">{{ clock_out_url }}</p>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin-top: 0.75rem;">
+        <p class="qr-url" style="margin-top: 0;">{{ clock_out_url }}</p>
+        <button class="btn-sm btn-outline copy-url-btn" data-url="{{ clock_out_url }}" aria-label="Copy Clock-Out URL" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">Copy URL</button>
+      </div>
     </div>
   </div>
 </div>
