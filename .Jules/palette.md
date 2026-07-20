@@ -1,0 +1,3 @@
+## 2025-05-24 - Accessible Toggle Switch Custom Styling
+**Learning:** Hiding raw checkboxes with `display: none` completely breaks keyboard navigability and screen-reader accessibility, since they are removed from the accessibility tree and cannot receive focus. Visually hiding the `<input>` element instead ensures the input remains focusable and interactive for assistive technologies and keyboard-only users.
+**Action:** Always use visual-hiding CSS properties (e.g. `position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0);`) for custom input components, and provide explicit `:focus-visible` outline styles targeting the custom visual sibling (like a `.toggle-slider`).
