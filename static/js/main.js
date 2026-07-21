@@ -26,4 +26,29 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!confirm(btn.dataset.confirm)) e.preventDefault();
     });
   });
+
+  // Provide feedback on form submission and prevent duplicates
+  document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', (e) => {
+      if (e.defaultPrevented) return;
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        // Disable button immediately after click/submit to prevent duplicate submissions
+        setTimeout(() => {
+          submitBtn.disabled = true;
+          // Store original text
+          submitBtn.dataset.originalText = submitBtn.innerHTML;
+          // Set loading text
+          if (form.action.includes('clock-in')) {
+            submitBtn.innerHTML = 'Clocking In...';
+          } else if (form.action.includes('clock-out')) {
+            submitBtn.innerHTML = 'Clocking Out...';
+          } else {
+            submitBtn.innerHTML = 'Submitting...';
+          }
+        }, 0);
+      }
+    });
+  });
 });
