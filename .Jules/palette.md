@@ -1,0 +1,3 @@
+## 2026-03-05 - [Accessible Toggle Switches and Keyboard Focus Indicators]
+**Learning:** Using `display: none` to hide checkboxes inside toggle switches completely removes them from the accessibility tree, making them impossible for screen readers to discover and breaking standard keyboard `Tab` navigation. Replacing `display: none` with a visually hidden utility class preserves accessibility while custom styles provide clean focus indicators using `:focus-visible`.
+**Action:** Always avoid `display: none` for inputs that can be toggled or focused. Use absolute positioning with 1px width/height and clipping styles to keep elements accessible, and pair them with visible focus rings for keyboard users.
