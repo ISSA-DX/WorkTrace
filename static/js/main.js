@@ -26,4 +26,26 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!confirm(btn.dataset.confirm)) e.preventDefault();
     });
   });
+
+  // Handle "Set to Now" buttons for datetime-local inputs
+  document.querySelectorAll('[data-set-now]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.setNow;
+      const input = document.getElementById(targetId);
+      if (input) {
+        // Format current local date and time to YYYY-MM-DDTHH:MM format
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+
+        input.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+        // Focus the input to provide clear keyboard accessibility feedback
+        input.focus();
+      }
+    });
+  });
 });

@@ -34,7 +34,12 @@
                placeholder="you@example.com"/>
       </div>
       <div class="form-group">
-        <label for="end_time">End Time <span class="required">*</span></label>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.2rem;">
+          <label for="end_time" style="margin-bottom: 0;">End Time <span class="required">*</span></label>
+          <button type="button" class="btn-sm btn-outline" data-set-now="end_time"
+                  style="padding: 0.2rem 0.6rem; font-size: 0.75rem; font-weight: 600; border-radius: 4px;"
+                  aria-label="Set end time to current time">Set to Now 🕒</button>
+        </div>
         <input type="datetime-local" id="end_time" name="end_time" required
                value="{{ form_data.get('end_time', now.strftime('%Y-%m-%dT%H:%M')) }}"/>
       </div>
