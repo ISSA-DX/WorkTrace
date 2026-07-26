@@ -70,3 +70,7 @@ instance/
 
 # Logs
 *.log
+
+# Generated QR Codes & PDFs
+static/qr_codes/*.png
+pdfs/*.pdf
