@@ -16,7 +16,7 @@
       <div class="form-group">
         <label for="staff_id">Staff ID <span class="required">*</span></label>
         {% if employee %}
-          <input type="text" value="{{ employee.staff_id }}" disabled/>
+          <input type="text" id="staff_id" value="{{ employee.staff_id }}" disabled/>
           <p class="field-hint">Staff ID cannot be changed after creation.</p>
         {% else %}
           <input type="text" id="staff_id" name="staff_id" required
