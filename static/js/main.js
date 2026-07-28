@@ -26,4 +26,28 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!confirm(btn.dataset.confirm)) e.preventDefault();
     });
   });
+
+  // Handle form submissions with loading text and spinner on buttons
+  const forms = document.querySelectorAll('form');
+  forms.forEach(form => {
+    form.addEventListener('submit', () => {
+      const submitBtn = form.querySelector('button[data-loading-text], input[type="submit"][data-loading-text]');
+      if (submitBtn) {
+        const loadingText = submitBtn.getAttribute('data-loading-text');
+
+        // Prevent multiple submissions by disabling the button/form
+        setTimeout(() => {
+          submitBtn.disabled = true;
+        }, 10);
+
+        // Inject inline SVG spinner and loading text
+        submitBtn.innerHTML = `
+          <svg width="16" height="16" viewBox="0 0 50 50" style="animation: spin 1s linear infinite; margin-right: 6px; display: inline-block; vertical-align: middle;">
+            <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="5" stroke-dasharray="80 150" stroke-linecap="round"></circle>
+          </svg>
+          <span>${loadingText}</span>
+        `;
+      }
+    });
+  });
 });
