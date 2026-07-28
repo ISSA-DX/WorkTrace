@@ -70,3 +70,7 @@ instance/
 
 # Logs
 *.log
+
+# Runtime generated PDF and QR artifacts
+pdfs/timesheet_*.pdf
+static/qr_codes/*.png
