@@ -25,7 +25,7 @@
       {% for category, message in messages %}
         <div class="alert alert-{{ category }}">
           <span>{{ message }}</span>
-          <button class="alert-close" onclick="this.parentElement.remove()">✕</button>
+          <button class="alert-close" aria-label="Close alert" onclick="this.parentElement.remove()">✕</button>
         </div>
       {% endfor %}
     {% endwith %}
