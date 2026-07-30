@@ -26,4 +26,33 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!confirm(btn.dataset.confirm)) e.preventDefault();
     });
   });
+
+  // Auto-fill and persist employee details in clock-in/out forms
+  const clockInForm = document.querySelector('form[action*="clock-in"]');
+  const clockOutForm = document.querySelector('form[action*="clock-out"]');
+  const form = clockInForm || clockOutForm;
+
+  if (form) {
+    const fields = ['staff_id', 'name', 'position', 'email'];
+    // Pre-fill fields from localStorage if they are empty
+    fields.forEach(field => {
+      const input = form.querySelector(`#${field}`);
+      if (input && !input.value) {
+        const storedValue = localStorage.getItem(`worktrace_${field}`);
+        if (storedValue) {
+          input.value = storedValue;
+        }
+      }
+    });
+
+    // Persist fields to localStorage on form submit
+    form.addEventListener('submit', () => {
+      fields.forEach(field => {
+        const input = form.querySelector(`#${field}`);
+        if (input && input.value) {
+          localStorage.setItem(`worktrace_${field}`, input.value.trim());
+        }
+      });
+    });
+  }
 });

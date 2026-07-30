@@ -1,0 +1,3 @@
+## 2026-07-30 - Local Storage Persistence for Shift Logins
+**Learning:** For shift-based employee portals, forcing users to repeatedly type static biographical information (Full Name, Staff ID, Position, Email) on every clock-in/out introduces data entry friction and high typo probability. Offloading this data to client-side localStorage allows automatic state recovery safely without exposing confidential employee API endpoints publicly.
+**Action:** Always leverage non-sensitive client-side persistence (like localStorage) to pre-fill redundant form fields in high-frequency interactive applications.
