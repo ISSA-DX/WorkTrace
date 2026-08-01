@@ -43,6 +43,12 @@
         <input type="number" id="rest_minutes" name="rest_minutes" min="0" step="1"
                value="{{ form_data.get('rest_minutes', '0') }}"
                placeholder="e.g. 30"/>
+        <div class="quick-rest-options" style="display: flex; gap: 0.5rem; margin-top: 0.4rem; flex-wrap: wrap;">
+          <button type="button" class="btn-sm btn-outline btn-rest-option" data-minutes="15" aria-label="Set break to 15 minutes">15m</button>
+          <button type="button" class="btn-sm btn-outline btn-rest-option" data-minutes="30" aria-label="Set break to 30 minutes">30m</button>
+          <button type="button" class="btn-sm btn-outline btn-rest-option" data-minutes="45" aria-label="Set break to 45 minutes">45m</button>
+          <button type="button" class="btn-sm btn-outline btn-rest-option" data-minutes="60" aria-label="Set break to 60 minutes">1h</button>
+        </div>
         <small class="form-hint">Total break or rest time taken during the shift.</small>
       </div>
       <button type="submit" class="btn btn-danger btn-full">Submit Clock-Out ✓</button>

@@ -1,0 +1,3 @@
+## 2026-08-01 - Preset Buttons for Quick Form Input
+**Learning:** Providing quick-select button presets for numeric fields (such as rest/break durations) significantly improves form completion speeds and ease-of-use, especially on mobile devices where scanning a QR code is the entry point. Additionally, real-time input formatting (such as uppercase translation on Staff ID inputs) provides immediate correct visual feedback to the user and avoids form submission errors.
+**Action:** Always provide quick-select buttons alongside complex or frequent inputs. Toggle the button active states dynamically on input change using existing design system classes to avoid introducing custom CSS classes.

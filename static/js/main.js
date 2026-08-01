@@ -26,4 +26,40 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!confirm(btn.dataset.confirm)) e.preventDefault();
     });
   });
+
+  // Quick rest options sync for clock-out form
+  const restOptions = document.querySelectorAll('.btn-rest-option');
+  const restInput = document.getElementById('rest_minutes');
+  if (restInput && restOptions.length > 0) {
+    const syncRestButtons = () => {
+      const val = restInput.value;
+      restOptions.forEach(o => {
+        if (o.dataset.minutes === val) {
+          o.classList.remove('btn-outline');
+          o.classList.add('btn-primary');
+        } else {
+          o.classList.remove('btn-primary');
+          o.classList.add('btn-outline');
+        }
+      });
+    };
+
+    restOptions.forEach(opt => {
+      opt.addEventListener('click', () => {
+        restInput.value = opt.dataset.minutes;
+        syncRestButtons();
+      });
+    });
+
+    restInput.addEventListener('input', syncRestButtons);
+    syncRestButtons();
+  }
+
+  // Force uppercase on Staff ID input
+  const staffIdInput = document.getElementById('staff_id');
+  if (staffIdInput) {
+    staffIdInput.addEventListener('input', () => {
+      staffIdInput.value = staffIdInput.value.toUpperCase();
+    });
+  }
 });
