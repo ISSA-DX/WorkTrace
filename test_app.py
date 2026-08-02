@@ -1301,3 +1301,30 @@ class TestEdgeCases:
         }, follow_redirects=True)
         assert resp.status_code == 200
         # Should either reject or not create
+
+
+class TestPaletteUX:
+    """Tests focused on the custom UX improvements implemented by Palette."""
+
+    def test_focus_visible_styling_present(self, client):
+        """Verify that focus-visible styling is defined in the CSS sheet."""
+        resp = client.get('/static/css/style.css')
+        assert resp.status_code == 200
+        assert b':focus-visible' in resp.data
+        assert b'outline' in resp.data
+
+    def test_alert_close_has_aria_label(self, app):
+        """Verify that the alert close button contains an aria-label attribute in templates."""
+        templates_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
+
+        # Check base.html
+        base_path = os.path.join(templates_dir, 'base.html')
+        with open(base_path, 'r') as f:
+            base_content = f.read()
+        assert 'aria-label="Close alert"' in base_content
+
+        # Check admin_base.html
+        admin_base_path = os.path.join(templates_dir, 'admin_base.html')
+        with open(admin_base_path, 'r') as f:
+            admin_base_content = f.read()
+        assert 'aria-label="Close alert"' in admin_base_content
