@@ -1,0 +1,3 @@
+## 2026-05-24 - Accessible Keyboard Focus States and Screen Reader Labels
+**Learning:** Default browsers' outline/focus indicators can sometimes be hidden, inconsistent, or insufficient in customized designs (especially with custom borders/background colors). Explicit `:focus-visible` rules using the application's native `--accent` color token significantly enhance keyboard navigation accessibility. Additionally, icon-only dismiss buttons (like flash alert close crosses '✕') require explicit `aria-label` tags for screen-reader users.
+**Action:** Always include styled `:focus-visible` ring indicators and verify icon-only buttons have descriptive `aria-label` elements.
