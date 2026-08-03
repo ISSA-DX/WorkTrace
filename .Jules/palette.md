@@ -1,0 +1,3 @@
+## 2026-03-10 - Custom Checkbox Toggle Keyboard Focus & Screen Reader Accessibility
+**Learning:** Hiding custom checkbox toggle inputs via `display: none;` completely removes them from the accessibility tree and keyboard focus/tab order, making them unusable for screen reader and keyboard-only users. Applying standard CSS visual-hiding patterns keeps the input interactive and tabbable.
+**Action:** Always visually hide custom checkboxes or radio inputs using position/clip/overflow styles, and explicitly style visible focus indicators (like `:focus-visible`) on custom toggle labels/sliders to provide clear visual feedback during navigation.

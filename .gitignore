@@ -70,3 +70,7 @@ instance/
 
 # Logs
 *.log
+
+# WorkTrace generated files
+pdfs/
+static/qr_codes/
