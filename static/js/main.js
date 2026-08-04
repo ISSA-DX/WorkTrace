@@ -26,4 +26,47 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!confirm(btn.dataset.confirm)) e.preventDefault();
     });
   });
+
+  // Handle "Remember my details on this device" for clock-in/out forms
+  const isClockForm = document.querySelector('.form-header-in, .form-header-out');
+  if (isClockForm) {
+    const rememberMeCheckbox = document.getElementById('remember_me');
+    const fields = ['name', 'staff_id', 'position', 'email'];
+
+    // Load saved details on page load
+    const shouldRemember = localStorage.getItem('worktrace_remember_me') === 'true';
+    if (rememberMeCheckbox) {
+      rememberMeCheckbox.checked = shouldRemember;
+      if (shouldRemember) {
+        fields.forEach(fieldId => {
+          const val = localStorage.getItem('worktrace_' + fieldId);
+          const el = document.getElementById(fieldId);
+          if (val && el) {
+            el.value = val;
+          }
+        });
+      }
+    }
+
+    // Save or clear on form submit
+    const form = isClockForm.closest('.form-card')?.querySelector('form');
+    if (form) {
+      form.addEventListener('submit', () => {
+        if (rememberMeCheckbox && rememberMeCheckbox.checked) {
+          localStorage.setItem('worktrace_remember_me', 'true');
+          fields.forEach(fieldId => {
+            const el = document.getElementById(fieldId);
+            if (el) {
+              localStorage.setItem('worktrace_' + fieldId, el.value.trim());
+            }
+          });
+        } else {
+          localStorage.setItem('worktrace_remember_me', 'false');
+          fields.forEach(fieldId => {
+            localStorage.removeItem('worktrace_' + fieldId);
+          });
+        }
+      });
+    }
+  }
 });
