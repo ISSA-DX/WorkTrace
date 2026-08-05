@@ -1,0 +1,3 @@
+## 2026-05-24 - Accessible Toggle Switches
+**Learning:** Using `display: none` on inputs (like checkboxes inside toggle switch controls) hides them from screen readers and removes them from the keyboard tab order entirely, making them completely inaccessible. Using a CSS-only visually hidden utility instead keeps them focusable and readable by assistive technologies.
+**Action:** Replace `display: none` on hidden checkbox inputs with an absolute-position, zero-dimension screen-reader-friendly hidden state, and add explicit focus-visible outline indicators on parent/adjacent visual elements like the `.toggle-slider`.
