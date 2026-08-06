@@ -8,22 +8,22 @@
 
 <div class="stats-grid">
   <div class="stat-card">
-    <div class="stat-icon">👥</div>
+    <div class="stat-icon" aria-hidden="true">👥</div>
     <div class="stat-val">{{ total_employees }}</div>
     <div class="stat-label">Active Employees</div>
   </div>
   <div class="stat-card stat-card-blue">
-    <div class="stat-icon">🟢</div>
+    <div class="stat-icon" aria-hidden="true">🟢</div>
     <div class="stat-val">{{ clocked_in }}</div>
     <div class="stat-label">Currently Working</div>
   </div>
   <div class="stat-card stat-card-green">
-    <div class="stat-icon">✅</div>
+    <div class="stat-icon" aria-hidden="true">✅</div>
     <div class="stat-val">{{ completed }}</div>
     <div class="stat-label">Completed Today</div>
   </div>
   <div class="stat-card stat-card-orange">
-    <div class="stat-icon">💰</div>
+    <div class="stat-icon" aria-hidden="true">💰</div>
     <div class="stat-val">${{ '%.2f'|format(total_salary) }}</div>
     <div class="stat-label">Total Salary Today</div>
   </div>
