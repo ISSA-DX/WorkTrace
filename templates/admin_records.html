@@ -81,16 +81,16 @@
           <td class="actions">
             {% if record.clock_out_time and not record.is_approved %}
               <form method="POST" action="{{ url_for('admin_approve_record', record_id=record.id) }}" style="display:inline">
-                <button type="submit" class="btn-sm btn-primary">Approve</button>
+                <button type="submit" class="btn-sm btn-primary" aria-label="Approve record for {{ record.employee_name }} on {{ record.date.strftime('%b %d, %Y') }}">Approve</button>
               </form>
             {% endif %}
             {% if record.clock_in_time %}
-              <a href="{{ url_for('admin_generate_pdf', record_id=record.id) }}" class="btn-sm btn-outline">PDF</a>
+              <a href="{{ url_for('admin_generate_pdf', record_id=record.id) }}" class="btn-sm btn-outline" aria-label="Download PDF receipt for {{ record.employee_name }} on {{ record.date.strftime('%b %d, %Y') }}">PDF</a>
             {% endif %}
             <form method="POST" action="{{ url_for('admin_delete_record', record_id=record.id) }}"
                   style="display:inline"
                   onsubmit="return confirm('Delete this record?')">
-              <button type="submit" class="btn-sm btn-danger">Del</button>
+              <button type="submit" class="btn-sm btn-danger" aria-label="Delete record for {{ record.employee_name }} on {{ record.date.strftime('%b %d, %Y') }}">Del</button>
             </form>
           </td>
         </tr>
