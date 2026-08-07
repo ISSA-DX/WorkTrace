@@ -26,4 +26,26 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!confirm(btn.dataset.confirm)) e.preventDefault();
     });
   });
+
+  // Pre-fill and persist clock-in / clock-out forms from localStorage
+  const persistFields = ['name', 'staff_id', 'position', 'email'];
+  const clockForm = document.querySelector('form[action*="clock-in"], form[action*="clock-out"]');
+  if (clockForm) {
+    persistFields.forEach(fieldId => {
+      const input = clockForm.querySelector(`#${fieldId}`);
+      if (input && !input.value) {
+        const saved = localStorage.getItem(`worktrace_${fieldId}`);
+        if (saved) input.value = saved;
+      }
+    });
+
+    clockForm.addEventListener('submit', () => {
+      persistFields.forEach(fieldId => {
+        const input = clockForm.querySelector(`#${fieldId}`);
+        if (input) {
+          localStorage.setItem(`worktrace_${fieldId}`, input.value.trim());
+        }
+      });
+    });
+  }
 });
