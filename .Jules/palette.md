@@ -1,0 +1,3 @@
+## 2026-05-24 - Accessible Custom Checkbox Toggles
+**Learning:** Custom UI switches/toggles that rely on hiding the native checkbox via `display: none;` completely break keyboard navigation (tabs) and screen reader accessibility because the element is removed from the accessibility tree and flow. Instead, native inputs must be styled as visually-hidden (preserving their interactive position and flow in the DOM), and the custom styled control should map a `:focus-visible` outline to provide clear visual focus states for keyboard users.
+**Action:** Replace `display: none;` on styled toggle inputs with visually-hidden styles, and define target focus styles utilizing `:focus-visible` on matching adjacent nodes.
