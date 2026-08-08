@@ -11,7 +11,7 @@
     <form method="POST" action="{{ url_for('clock_out_form') }}" novalidate>
       <div class="form-group">
         <label for="name">Full Name <span class="required">*</span></label>
-        <input type="text" id="name" name="name" required
+        <input type="text" id="name" name="name" required autofocus
                value="{{ form_data.get('name', '') }}"
                placeholder="e.g. John Smith"/>
       </div>
@@ -43,7 +43,14 @@
         <input type="number" id="rest_minutes" name="rest_minutes" min="0" step="1"
                value="{{ form_data.get('rest_minutes', '0') }}"
                placeholder="e.g. 30"/>
-        <small class="form-hint">Total break or rest time taken during the shift.</small>
+        <small class="form-hint" style="margin-bottom: 0.5rem;">Total break or rest time taken during the shift.</small>
+        <div class="quick-select-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap;" role="group" aria-label="Quick select break minutes">
+          <button type="button" class="btn-sm btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="document.getElementById('rest_minutes').value='0'" aria-label="Set break time to 0 minutes">0 min</button>
+          <button type="button" class="btn-sm btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="document.getElementById('rest_minutes').value='15'" aria-label="Set break time to 15 minutes">15 min</button>
+          <button type="button" class="btn-sm btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="document.getElementById('rest_minutes').value='30'" aria-label="Set break time to 30 minutes">30 min</button>
+          <button type="button" class="btn-sm btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="document.getElementById('rest_minutes').value='45'" aria-label="Set break time to 45 minutes">45 min</button>
+          <button type="button" class="btn-sm btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="document.getElementById('rest_minutes').value='60'" aria-label="Set break time to 60 minutes">60 min</button>
+        </div>
       </div>
       <button type="submit" class="btn btn-danger btn-full">Submit Clock-Out ✓</button>
     </form>
