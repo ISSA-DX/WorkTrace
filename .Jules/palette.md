@@ -1,0 +1,3 @@
+## 2026-08-08 - Fast and Accessible Input Modifiers
+**Learning:** For inputs with numeric values where certain values are extremely common (e.g., rest or break minutes), adding a row of touch-friendly buttons directly underneath allows for lightning-fast selection on mobile devices without manual keyboard typing, while maintaining excellent keyboard and screen reader accessibility through roles and ARIA labeling.
+**Action:** Always provide standard, clear ARIA labels and use the `type="button"` attribute to prevent button clicks from trigger-submitting enclosing forms, while leveraging existing layout rules.
