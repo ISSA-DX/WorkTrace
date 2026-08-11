@@ -1079,6 +1079,34 @@ class TestAPIEndpoints:
         assert isinstance(data, list)
         assert any(e['staff_id'] == 'API1' for e in data)
 
+    def test_api_employee_info_found(self, app, client):
+        """
+        The /api/employee/info/<staff_id> route should be public,
+        and return the employee's details if they are active.
+        """
+        with app.app_context():
+            emp = Employee(staff_id='INFO1', name='Info User',
+                           email='info@example.com', position='Tester',
+                           hourly_rate=20, is_active=True)
+            db.session.add(emp)
+            db.session.commit()
+        resp = client.get('/api/employee/info/info1')
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data['found'] is True
+        assert data['name'] == 'Info User'
+        assert data['email'] == 'info@example.com'
+        assert data['position'] == 'Tester'
+
+    def test_api_employee_info_not_found(self, client):
+        """
+        The route should return found: False if the employee doesn't exist.
+        """
+        resp = client.get('/api/employee/info/nonexistent')
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data['found'] is False
+
 
 # ============================================================
 # ERROR HANDLER TESTS

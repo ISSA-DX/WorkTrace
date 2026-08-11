@@ -1385,6 +1385,20 @@ def api_employees():
     } for e in employees])
 
 
+@app.route('/api/employee/info/<staff_id>')
+def api_employee_info(staff_id):
+    """Return specific public-facing employee details by Staff ID."""
+    employee = Employee.query.filter_by(staff_id=staff_id.upper(), is_active=True).first()
+    if employee:
+        return jsonify({
+            'found': True,
+            'name': employee.name,
+            'email': employee.email,
+            'position': employee.position or ''
+        })
+    return jsonify({'found': False})
+
+
 # ------------------------------------------------------------------
 # SECTION 13: DATABASE INITIALIZATION
 # This runs once when the app starts to create tables and sample data.

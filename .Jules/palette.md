@@ -1,0 +1,3 @@
+## 2026-08-11 - Kiosk Session Security & Accessible Form Autocomplete
+**Learning:** On shared terminals or public kiosks, pre-populating a form with the last-used session data from localStorage can compromise privacy (leaking names/emails) and increase the likelihood of accidental submission errors. However, typing a unique ID (like Staff ID) to fetch specific, non-sensitive details on-demand via a debounced API is highly secure, private, and delightful. Adding `aria-live="polite"` ensures screen-reader users hear dynamic confirmation feedback immediately.
+**Action:** Always prefer fetching specific user details on-demand using a unique token/ID with debounced typing over automatically remembering and pre-filling personal data on page load for multi-user interfaces.
