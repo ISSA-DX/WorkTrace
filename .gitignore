@@ -70,3 +70,7 @@ instance/
 
 # Logs
 *.log
+
+# Runtime generated outputs
+pdfs/
+static/qr_codes/
