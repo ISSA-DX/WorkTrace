@@ -1,0 +1,3 @@
+## 2026-05-24 - [Keyboard Focus & Autocomplete UX]
+**Learning:** Keyboard navigation requires a clear visual indication of focus state (using `:focus-visible` avoids cluttering the mouse user interface while assisting power or keyboard-only users). Additionally, explicit `autocomplete` attributes on key fields (such as `name`, `email`, `username`, and `current-password`) significantly lower cognitive load and form submission friction.
+**Action:** Always include robust `:focus-visible` CSS definitions and utilize semantically precise autocomplete attributes for standard inputs to ensure maximum accessibility and user delight.
