@@ -68,5 +68,9 @@ Thumbs.db
 instance/
 *.db
 
+# Generated artifacts
+pdfs/
+static/qr_codes/*.png
+
 # Logs
 *.log
