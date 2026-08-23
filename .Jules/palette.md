@@ -1,0 +1,3 @@
+## 2025-08-23 - Alert Close Buttons & Focus Visible States
+**Learning:** Flash notification alert close buttons (`.alert-close`) used icon-only (`✕`) text without `aria-label` or explicit `type="button"`, rendering them unusable or confusing for screen readers. Additionally, interactive links and buttons lacked high-contrast `:focus-visible` outlines.
+**Action:** Always provide explicit `type="button"` and `aria-label="Close alert"` for icon-only alert dismiss buttons, and pair with CSS `:focus-visible` styling using `outline: 2px solid var(--accent)` and `outline-offset: 2px` for clear keyboard navigation feedback.
