@@ -9,9 +9,10 @@
   {% block extra_head %}{% endblock %}
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <nav class="navbar">
     <a href="{{ url_for('index') }}" class="navbar-brand">
-      <span class="brand-icon">⏱</span> WorkTrace
+      <span class="brand-icon" aria-hidden="true">⏱</span> WorkTrace
     </a>
     <div class="navbar-links">
       <a href="{{ url_for('clock_in_form') }}">Clock In</a>
@@ -23,15 +24,15 @@
   <div class="flash-container">
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% for category, message in messages %}
-        <div class="alert alert-{{ category }}">
+        <div class="alert alert-{{ category }}" role="alert">
           <span>{{ message }}</span>
-          <button class="alert-close" onclick="this.parentElement.remove()">✕</button>
+          <button class="alert-close" aria-label="Close message" onclick="this.parentElement.remove()">✕</button>
         </div>
       {% endfor %}
     {% endwith %}
   </div>
 
-  <main>{% block content %}{% endblock %}</main>
+  <main id="main-content">{% block content %}{% endblock %}</main>
 
   <footer class="site-footer">
     <p>&copy; 2025 WorkTrace &mdash; Employee Time Tracking</p>
