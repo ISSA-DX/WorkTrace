@@ -1,0 +1,3 @@
+## 2025-05-24 - Accessible Toggle Focus and Visually Hidden Inputs
+**Learning:** Custom toggle switches using `display: none` on `<input type="checkbox">` hide the input completely from the accessibility tree, breaking keyboard focus and screen reader interaction. Replacing `display: none` with a standard visually hidden utility (`clip: rect(0, 0, 0, 0)`) allows keyboard navigation (`:focus-visible`) to correctly highlight the associated toggle slider.
+**Action:** Always visually hide checkbox or radio inputs rather than using `display: none` when building custom controls to preserve full keyboard focusability and screen reader accessibility.
