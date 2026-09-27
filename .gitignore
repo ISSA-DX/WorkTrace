@@ -68,5 +68,9 @@ Thumbs.db
 instance/
 *.db
 
+# Generated PDF and QR code files
+pdfs/*.pdf
+static/qr_codes/*.png
+
 # Logs
 *.log
