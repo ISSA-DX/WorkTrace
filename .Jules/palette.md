@@ -1,0 +1,3 @@
+## 2025-05-24 - Flash Alert Dismiss Buttons & Keyboard Focus States
+**Learning:** Icon-only close buttons in flash alerts (such as `✕`) lack explicit `type="button"` and `aria-label="Dismiss alert"`. Without `type="button"`, buttons placed inside or near `<form>` elements default to form submit buttons. Additionally, custom styled interactive controls like buttons and custom close icons require `:focus-visible` outline rings so keyboard users can visually identify focused elements.
+**Action:** Always specify `type="button"` and `aria-label` on icon-only dismiss buttons, and pair interactive components with explicit `:focus-visible` focus rings using system theme colors.
