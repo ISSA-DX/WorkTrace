@@ -38,11 +38,11 @@
             {% endif %}
           </td>
           <td class="actions">
-            <a href="{{ url_for('admin_edit_employee', staff_id=emp.staff_id) }}" class="btn-sm btn-outline">Edit</a>
+            <a href="{{ url_for('admin_edit_employee', staff_id=emp.staff_id) }}" class="btn-sm btn-outline" aria-label="Edit employee {{ emp.name }}">Edit</a>
             <form method="POST" action="{{ url_for('admin_delete_employee', staff_id=emp.staff_id) }}"
                   style="display:inline"
                   onsubmit="return confirm('Delete {{ emp.name }}? This will also delete all their time records.')">
-              <button type="submit" class="btn-sm btn-danger">Delete</button>
+              <button type="submit" class="btn-sm btn-danger" aria-label="Delete employee {{ emp.name }}">Delete</button>
             </form>
           </td>
         </tr>

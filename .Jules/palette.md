@@ -1,0 +1,3 @@
+## 2025-05-24 - Focus Indicators and Action Button Accessibility
+**Learning:** Native CSS `:focus-visible` outline styles with proper offset ensure high-contrast keyboard navigation indicators across custom tables and forms without distorting visual alignment when clicked by mouse users. Additionally, context-rich `aria-label`s on abbreviated table action buttons (like "Del" or "PDF") significantly improve screen reader clarity for tabular data.
+**Action:** Always apply global `:focus-visible` styles with `outline-offset` and append dynamic entity labels (e.g. employee names) to table action button ARIA attributes.
