@@ -1,0 +1,3 @@
+## 2025-05-18 - Accessible Icon-Only Alert Dismiss Buttons and Flash Containers
+**Learning:** Icon-only close buttons (like `✕`) on dynamic flash alert containers lack accessible names for screen readers and default to `type="submit"` when placed inside forms if `type="button"` is omitted. Additionally, dynamic alerts need `role="alert"` for screen readers to announce them upon appearance and `:focus-visible` styles for high-contrast keyboard focus indicators.
+**Action:** Always include `role="alert"`, explicit `type="button"`, and `aria-label="Dismiss alert"` on flash message dismiss buttons, along with `:focus-visible` styles in global CSS.
