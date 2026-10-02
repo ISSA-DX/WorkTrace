@@ -1,0 +1,3 @@
+## 2025-05-24 - Accessible Flash Alert Close Buttons & Focus Indicators
+**Learning:** Icon-only close buttons (like '✕' in alert banners) lack accessible names unless explicitly given an `aria-label`, leaving screen reader users unaware of their function. Furthermore, standard button elements require explicit `:focus-visible` styles to ensure keyboard navigation focus is clearly visible across browsers.
+**Action:** Always include `type="button"` and `aria-label="Close alert"` (or similar descriptive label) on icon-only close buttons, and define `:focus-visible` outline styles for buttons in the central stylesheet.
