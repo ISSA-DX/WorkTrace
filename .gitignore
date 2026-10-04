@@ -70,3 +70,8 @@ instance/
 
 # Logs
 *.log
+
+# Generated PDFs and QR codes
+pdfs/
+static/qr_codes/*.png
+!static/qr_codes/.gitkeep
