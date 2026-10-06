@@ -70,3 +70,10 @@ instance/
 
 # Logs
 *.log
+
+# Generated PDFs and QR codes
+pdfs/timesheet_*_*.pdf
+!pdfs/timesheet_*_2026-05-24.pdf
+static/qr_codes/*.png
+!static/qr_codes/clock_in_20260524.png
+!static/qr_codes/clock_out_20260524.png
