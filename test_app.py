@@ -1301,3 +1301,16 @@ class TestEdgeCases:
         }, follow_redirects=True)
         assert resp.status_code == 200
         # Should either reject or not create
+
+    def test_flash_alert_accessibility(self, client):
+        """
+        Flash message alerts must be accessible with role="alert" and aria-label="Dismiss alert".
+        """
+        resp = client.post('/clock-in', data={
+            'name': '',
+            'staff_id': '',
+            'email': ''
+        }, follow_redirects=True)
+        html = resp.data.decode('utf-8')
+        assert 'role="alert"' in html
+        assert 'aria-label="Dismiss alert"' in html
