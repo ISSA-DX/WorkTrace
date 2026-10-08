@@ -26,4 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!confirm(btn.dataset.confirm)) e.preventDefault();
     });
   });
+
+  // Handle form submit loading states
+  document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', function (e) {
+      const submitBtn = form.querySelector('button[type="submit"][data-loading-text]');
+      if (submitBtn && !submitBtn.disabled) {
+        submitBtn.disabled = true;
+        submitBtn.setAttribute('aria-busy', 'true');
+        submitBtn.dataset.originalText = submitBtn.textContent;
+        submitBtn.textContent = submitBtn.dataset.loadingText;
+      }
+    });
+  });
 });
