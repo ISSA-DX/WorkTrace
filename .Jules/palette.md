@@ -1,0 +1,3 @@
+## 2025-05-24 - Accessible Flash Alerts & Focus Indicators
+**Learning:** Dismissable flash alert buttons without explicit ARIA labels or `type="button"` attributes leave screen reader users unaware of the close button's purpose or cause unintended form submissions if nested inside forms. Additionally, missing `:focus-visible` styles make keyboard navigation difficult to track visually.
+**Action:** Always add `aria-live="polite"` on container regions, `role="alert"` on dynamic notification banners, and explicit `aria-label="Dismiss alert"` + `type="button"` on close buttons. Pair these with uniform `:focus-visible` ring outlines across interactive controls.
