@@ -1301,3 +1301,25 @@ class TestEdgeCases:
         }, follow_redirects=True)
         assert resp.status_code == 200
         # Should either reject or not create
+
+
+# ============================================================
+# ACCESSIBILITY TESTS
+# ============================================================
+
+
+class TestAccessibility:
+    """Tests for UI accessibility attributes."""
+
+    def test_flash_alert_close_button_accessibility(self, client):
+        """
+        Flash message alert close buttons must have type="button"
+        and aria-label="Close alert" for keyboard & screen reader accessibility.
+        """
+        resp = client.post('/clock-in', data={
+            'name': '', 'staff_id': 'S001',
+            'email': 'a@b.com', 'start_time': '2025-01-15T09:00'
+        }, follow_redirects=True)
+        assert resp.status_code == 200
+        assert b'aria-label="Close alert"' in resp.data
+        assert b'type="button"' in resp.data
