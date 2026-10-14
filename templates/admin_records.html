@@ -90,7 +90,7 @@
             <form method="POST" action="{{ url_for('admin_delete_record', record_id=record.id) }}"
                   style="display:inline"
                   onsubmit="return confirm('Delete this record?')">
-              <button type="submit" class="btn-sm btn-danger">Del</button>
+              <button type="submit" class="btn-sm btn-danger" aria-label="Delete record">Del</button>
             </form>
           </td>
         </tr>
