@@ -70,3 +70,7 @@ instance/
 
 # Logs
 *.log
+
+# Runtime generated files
+pdfs/*.pdf
+static/qr_codes/*.png
