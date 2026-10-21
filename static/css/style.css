@@ -82,6 +82,10 @@ body {
 .alert-info { background: #d1ecf1; color: #0c5460; border-left: 4px solid var(--info); }
 .alert-close { background: none; border: none; cursor: pointer; font-size: 1rem; opacity: .6; padding: 0 .25rem; }
 .alert-close:hover { opacity: 1; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 
 /* ===== Main content ===== */
 main { flex: 1; }
