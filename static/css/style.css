@@ -87,6 +87,12 @@ body {
 main { flex: 1; }
 .site-footer { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: .85rem; background: var(--primary); color: rgba(255,255,255,.4); }
 
+/* ===== Focus outline accessibility ===== */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 /* ===== Buttons ===== */
 .btn {
   display: inline-flex;
