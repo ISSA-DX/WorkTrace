@@ -70,3 +70,7 @@ instance/
 
 # Logs
 *.log
+
+# Generated files
+pdfs/timesheet_*.pdf
+static/qr_codes/clock_*.png
