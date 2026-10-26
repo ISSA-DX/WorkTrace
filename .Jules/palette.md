@@ -1,0 +1,3 @@
+## 2025-05-24 - Accessible Flash Notification Alerts & Dismiss Controls
+**Learning:** Flash notification banners dynamically rendered in Jinja2 templates were missing proper ARIA roles (`role="alert"`), preventing screen readers from immediately announcing important system messages upon page load. Additionally, interactive dismiss buttons lacked accessible labels (`aria-label`) and visible focus indicators (`:focus-visible`), causing poor keyboard accessibility.
+**Action:** Always include `role="alert"` on flash alert containers, give dismiss buttons explicit `aria-label` attributes (e.g. `aria-label="Dismiss notification"`), and provide custom `:focus-visible` styling for close actions.
