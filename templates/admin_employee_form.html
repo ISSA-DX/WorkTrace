@@ -56,10 +56,10 @@
       {% if employee %}
       <div class="form-group">
         <label>Active Status</label>
-        <label class="toggle-label">
-          <input type="checkbox" name="is_active" id="is_active"
+        <label class="toggle-label" for="is_active">
+          <input type="checkbox" name="is_active" id="is_active" role="switch"
                  {{ 'checked' if employee.is_active }}/>
-          <span class="toggle-slider"></span>
+          <span class="toggle-slider" aria-hidden="true"></span>
           Employee is active
         </label>
       </div>

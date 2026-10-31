@@ -70,3 +70,13 @@ instance/
 
 # Logs
 *.log
+
+# Generated runtime files
+pdfs/*.pdf
+static/qr_codes/*.png
+!pdfs/timesheet_AP01_2026-05-24.pdf
+!pdfs/timesheet_PDF01_2026-05-24.pdf
+!pdfs/timesheet_T002_2026-05-24.pdf
+!pdfs/timesheet_T999_2026-05-24.pdf
+!static/qr_codes/clock_in_20260524.png
+!static/qr_codes/clock_out_20260524.png
