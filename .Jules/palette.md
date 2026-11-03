@@ -1,0 +1,3 @@
+## 2025-05-24 - Accessible Dismiss Controls & Focus Rings for Flash Banners
+**Learning:** Flash message dismissal buttons rendered with Unicode characters (like `✕`) without an explicit `aria-label` or `type="button"` are announced confusingly by screen readers and risk acting as form submit buttons when nested. Furthermore, inline dismiss and interactive buttons lacking `:focus-visible` styling leave keyboard navigators without orientation when closing transient notifications.
+**Action:** Always provide explicit `type="button"`, `aria-label="Dismiss alert"`, and a high-contrast `:focus-visible` ring on close and action buttons across templates.
