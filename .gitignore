@@ -70,3 +70,7 @@ instance/
 
 # Logs
 *.log
+
+# Runtime generated files (ignore future generated files, keep tracked demo fixtures)
+pdfs/timesheet_*_2026-11-*.pdf
+static/qr_codes/*_202611*.png
