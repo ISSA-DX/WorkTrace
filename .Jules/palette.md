@@ -1,0 +1,3 @@
+## 2026-05-24 - Accessible Flash Dismiss Buttons
+**Learning:** Dismiss buttons displaying Unicode characters (like `✕`) without an explicit `aria-label` or button `type` are announced ambiguously to screen readers (often as "multiplication sign" or unlabelled button) and may trigger accidental form submissions if placed inside forms without `type="button"`. Additionally, lacking a `:focus-visible` state makes them invisible to keyboard navigators tabbing through notifications.
+**Action:** Always provide `type="button"`, `aria-label="Dismiss alert"`, and a high-contrast `:focus-visible` indicator on notification close controls.
