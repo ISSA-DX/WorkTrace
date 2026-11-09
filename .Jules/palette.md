@@ -1,0 +1,3 @@
+## 2026-11-09 - Accessible Custom Switch Toggles and Alert Dismiss Buttons
+**Learning:** Custom UI switches often hide the native `<input type="checkbox">` using `display: none;`, which completely removes the control from the accessibility tree and keyboard focus order (Tab key cannot focus it, and screen readers skip it). Additionally, icon-only buttons like dismiss (`✕`) lack accessible names if `aria-label` is not provided.
+**Action:** Always visually hide underlying checkbox inputs with `position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;`, apply `:focus-visible` styling on the visual switch via the adjacent sibling combinator (`input:focus-visible + .toggle-slider`), and ensure dismiss buttons carry explicit `aria-label` and `type="button"`.
