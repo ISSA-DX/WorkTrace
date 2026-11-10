@@ -1,0 +1,3 @@
+## 2025-05-24 - Accessible Dismissible Alerts and Focus Visible Rings
+**Learning:** Dismiss buttons without `type="button"` or `aria-label` inside alert dialogs leave screen reader users unaware of their purpose and keyboard users without visible focus indication. Adding `aria-live="polite"` to containers, `role="alert"` to alert items, and explicit `:focus-visible` styling ensures seamless navigation for assistive technologies without layout shifts.
+**Action:** When creating or modifying dismiss buttons or alerts in Jinja templates, always provide `type="button"`, descriptive `aria-label`, alert container live region semantics, and `:focus-visible` styling using `currentColor`.
